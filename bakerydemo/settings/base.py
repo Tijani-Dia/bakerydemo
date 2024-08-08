@@ -77,12 +77,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
+    "dj_tracker",
 ]
 
 MIDDLEWARE = [
     # Uncomment to enable django-debug-toolbar
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "dj_tracker.middleware.DjTrackerMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -236,3 +238,10 @@ if "CSP_DEFAULT_SRC" in os.environ:
         CSP_BASE_URI = os.environ.get("CSP_BASE_URI").split(",")
     if "CSP_OBJECT_SRC" in os.environ:
         CSP_OBJECT_SRC = os.environ.get("CSP_OBJECT_SRC").split(",")
+
+
+DJ_TRACKER = {
+    "FIELD_DESCRIPTORS": {
+        "Creator": "dj_tracker.field_descriptors.EditableFieldDescriptor"
+    }
+}

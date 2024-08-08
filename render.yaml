@@ -1,0 +1,22 @@
+databases:
+  - name: bakerydemodb
+    plan: free
+    databaseName: bakerydemo
+    user: bakerydemo
+
+services:
+  - type: web
+    plan: free
+    name: bakerydemo
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn bakerydemo.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bakerydemodb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4

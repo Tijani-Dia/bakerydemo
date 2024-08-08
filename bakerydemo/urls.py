@@ -1,4 +1,3 @@
-import debug_toolbar
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path, re_path
@@ -7,6 +6,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.images.views.serve import ServeView
+from dj_tracker.urls import urlpatterns as dj_tracker_urls
 
 from bakerydemo.search import views as search_views
 
@@ -24,7 +24,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("sitemap.xml", sitemap),
     path("api/v2/", api_router.urls),
-    path("__debug__/", include(debug_toolbar.urls)),
+    path("dj-tracker/", include(dj_tracker_urls)),
 ]
 
 
